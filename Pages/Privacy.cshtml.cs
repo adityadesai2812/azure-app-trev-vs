@@ -12,8 +12,9 @@ namespace azure_app_trev_VisualStudio.Pages
             _logger = logger;
         }
 
-        public void OnGet()
-        {
-        }
+        //public void OnGet()
+        //{
+        //    throw new Exception("Testing inside");
+        //}
     }
 }
