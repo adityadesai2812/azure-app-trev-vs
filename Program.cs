@@ -1,6 +1,16 @@
+using azure_app_trev_VisualStudio.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionstring = builder.Configuration.GetConnectionString("AzureSqlConnection");
+//builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionstring));
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connectionstring, sqlOptions =>
+        sqlOptions.EnableRetryOnFailure() // Default settings
+    ));
 builder.Services.AddRazorPages();
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
